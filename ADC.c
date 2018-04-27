@@ -1,48 +1,7 @@
-/*
- * NOE THAT: resolution: 12-bit
- * Max input voltage: 1.8 Volt
- * Return Value is in "milli volt"
- * Connectpin34 (GNDA_ADC to common ground*/
-
-
+#include "ADC.h"
 #include <stdio.h>
-#include <time.h>
 
-#define RET_OK  0
-#define RET_NOK -1
-
-
-
-void pauseSec(int sec);
-int ADC_Init(void);
-int ADC_Read_Pin(unsigned int pinNumber, unsigned int *readValue);
 #define MGRNUM	8
-
-int main()
-{
-
-	ADC_Init();
-	unsigned int value = 0;
-	while(1)
-	{
-		ADC_Read_Pin(0, &value);
-		printf("VALUE: %d\n", value);
-		pauseSec(1);
-
-	}
-	return 0;
-}
-
-void pauseSec(int sec)
-{
-	time_t now,later;
-
-	now = time(NULL);
-	later = time(NULL);
-
-	while((later - now) < (double)sec)
-		later = time(NULL);
-}
 
 int ADC_Init(void)
 {
@@ -73,4 +32,3 @@ int ADC_Read_Pin(unsigned int pinNumber, unsigned int *readValue)
 	*readValue = value;
 	return RET_OK;
 }
-
